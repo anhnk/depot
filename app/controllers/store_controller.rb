@@ -7,6 +7,10 @@ class StoreController < ApplicationController
   before_action :increment_counter, only: [:index]
 
   def index
-    @products = Product.order(:title)
+    if params[:set_locale]
+      redirect_to store_url(locale: params[:set_locale])
+    else
+      @products = Product.order(:title)
+    end
   end
 end
